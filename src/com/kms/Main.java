@@ -22,16 +22,19 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Integer count = 0;
+//        Integer count = 0;
         SocialSecurityNumber ssnGen = new SocialSecurityNumber();
-        while (true) {
-            String ssn = ssnGen.GenerateInvaildSSN(true, true, true);
-            if(isValidSSN(ssn))
-                count++;
-            else
-                break;
-        }
+//        while (true) {
+//            String ssn = ssnGen.GenerateInvaildSSN(true, true, true);
+//            if(isValidSSN(ssn))
+//                count++;
+//            else
+//                break;
+//        }
 
-        System.out.println(count);
+        while (true) {
+            String ssn = ssnGen.GetConsecutiveSSN();
+            System.out.println(ssn);
+        }
     }
 }

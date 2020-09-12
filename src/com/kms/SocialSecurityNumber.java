@@ -17,7 +17,7 @@ public class SocialSecurityNumber
 
     }
 
-    public String GenerateInvaidSSNOutOfBound()
+    public String GenInvalidSSNOutOfBound()
     {
         Integer rng_sama;
 
@@ -39,7 +39,7 @@ public class SocialSecurityNumber
         }
     }
 
-    public String GenerateInvaildSSN(boolean isAreaVaild, boolean isGroupVaild, boolean isSerialVaild)
+    public String GenInvalidSSNByGroup(boolean isAreaVaild, boolean isGroupVaild, boolean isSerialVaild)
     {
         StringBuilder _sb_ssn;
 
@@ -110,4 +110,51 @@ public class SocialSecurityNumber
 
         return _sb_area.toString() + _sb_group.toString() + _sb_serial.toString();
     }
+
+    public String GenDuplicatedSSN() {
+        int chosenNumber = random.ints(1, 10).findFirst().getAsInt();
+        int length = random.ints(5, 9).findFirst().getAsInt();
+        int offset = random.ints(0, 10 - length).findFirst().getAsInt();
+
+        StringBuilder _sb_DuplicatedPart = new StringBuilder();
+        for (int i = 0; i < length; i++)
+            _sb_DuplicatedPart.append(chosenNumber);
+
+        int firstPartLength = offset;
+        int secondPartLength = 9 - firstPartLength - length;
+
+        StringBuilder _sb_FirstPart = new StringBuilder();
+        StringBuilder _sb_SecondPart = new StringBuilder();
+
+        for (int i = 0; i < firstPartLength; i++)
+            _sb_FirstPart.append(random.ints(0, 10).findFirst().getAsInt());
+
+        for (int i = 0; i < secondPartLength; i++)
+            _sb_SecondPart.append(random.ints(0, 9).findFirst().getAsInt());
+
+        return _sb_FirstPart.toString() + _sb_DuplicatedPart.toString() + _sb_SecondPart.toString();
+    }
+
+    public String GetConsecutiveSSN() {
+        int length = random.ints(5, 9).findFirst().getAsInt();
+        int consecutiveStartNum = random.ints(1, 10 - length).findFirst().getAsInt();
+        int offset = random.ints(0, 10 - length).findFirst().getAsInt();
+
+        StringBuilder _sb_ConsecutivedPart = new StringBuilder();
+        for (int i = consecutiveStartNum; i < length + consecutiveStartNum ; i++)
+            _sb_ConsecutivedPart.append(i);
+
+       int firstPartLength = offset;
+       int secondPartLength = 9 - firstPartLength - length;
+       StringBuilder _sb_FirstPart = new StringBuilder();
+       StringBuilder _sb_SecondPart = new StringBuilder();
+
+       for (int i = 0; i < firstPartLength; i++)
+           _sb_FirstPart.append(random.ints(0, 10).findFirst().getAsInt());
+
+        for (int i = 0; i < secondPartLength; i++)
+           _sb_SecondPart.append(random.ints(0, 9).findFirst().getAsInt());
+
+       return _sb_FirstPart.toString() + _sb_ConsecutivedPart.toString() + _sb_SecondPart.toString();
+   }
 }
